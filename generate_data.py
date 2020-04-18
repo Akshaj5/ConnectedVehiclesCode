@@ -246,8 +246,8 @@ print '\n'
 print '\n'
 '''
 
+sys.stdout.write('ov_sets = [')
 for i in range(49):
-	sys.stdout.write('A'+str(i)+'= [')
 	for k in list_of_common_vehicles[i]:
 		sys.stdout.write('[')
 		for j in range(119):
@@ -260,4 +260,11 @@ for i in range(49):
 		else:
 			sys.stdout.write('0],')
 		sys.stdout.write('\n')
-	sys.stdout.write(']\n')
+sys.stdout.write(']\n')
+
+sys.stdout.write('len_of_sets = [')
+sum =0
+for i in range(48):
+    sys.stdout.write(str(sum)+", ")
+    sum = sum + len(list_of_common_vehicles[i])
+sys.stdout.write(str(sum + len(list_of_common_vehicles[48])) + ']')

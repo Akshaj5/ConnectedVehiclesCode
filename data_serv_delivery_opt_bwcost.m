@@ -1,4 +1,4 @@
-function [bw_cost,mem] = data_serv_delivery_opt_bwcost(A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,A10,A11,A12,A13,A14,A15,A16,A17,A18,A19,A20,A21,A22,A23,A24,A25,A26,A27,A28,A29,A30,A31,A32,A33,A34,A35,A36,A37,A38,A39,A40,A41,A42,A43,A44,A45,A46,A47,A48,N,M,beta,mem_edge,mem_occup,mem_app,x,v2e_comtime,v2e_trvtime,vel_free,bandwidth,density_jam,density,bw_const,l_cov)
+function [bw_cost,mem] = data_serv_delivery_opt_bwcost(ov_sets,len_of_sets,N,M,beta,mem_edge,mem_occup,mem_app,x,v2e_comtime,v2e_trvtime,vel_free,bandwidth,density_jam,density,bw_const,l_cov)
 
 nov = N;
 noe = M;
@@ -14,6 +14,7 @@ cvx_begin
     expression bw_cost;
     expression mem_accum_vehicle(nov);
     expression mem_accum_edge(noe);
+    expression temp_sum(noe);
     
     for j = 1:noe
         for i = 1:nov
@@ -34,8 +35,13 @@ cvx_begin
     end
 
     for j = 1:noe
-        for i = 1:nov
-            mem_accum_edge(j) = mem_accum_edge(j) + mem(i,j)*x(i,j);
+        for k = len_of_sets(j)+1:len_of_sets(j+1)
+            for i = 1:nov
+                temp_sum(j) = temp_sum(j) + mem(i,j)*ov_sets(k,i);
+            end
+            if(mem_accum_edge(j) <= temp_sum(j))
+                mem_accum_edge(j) = temp_sum(j);
+            end
         end
     end
     
