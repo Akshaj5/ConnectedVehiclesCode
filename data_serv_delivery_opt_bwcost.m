@@ -36,12 +36,11 @@ cvx_begin
 
     for j = 1:noe
         for k = len_of_sets(j)+1:len_of_sets(j+1)
+            mem_accum_edge(j) = 0;
             for i = 1:nov
-                temp_sum(j) = temp_sum(j) + mem(i,j)*ov_sets(k,i);
+                temp_sum(j) = temp_sum(j) + mem(i,j)*ov_sets(k,j);
             end
-            if(mem_accum_edge(j) <= temp_sum(j))
-                mem_accum_edge(j) = temp_sum(j);
-            end
+            mem_accum_edge(j) = max(mem_accum_edge(j),temp_sum(j))
         end
     end
     

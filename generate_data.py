@@ -267,4 +267,4 @@ sum =0
 for i in range(48):
     sys.stdout.write(str(sum)+", ")
     sum = sum + len(list_of_common_vehicles[i])
-sys.stdout.write(str(sum + len(list_of_common_vehicles[48])) + ']')
+sys.stdout.write(str(sum) + ", " + str(sum + len(list_of_common_vehicles[48])) + ']')
