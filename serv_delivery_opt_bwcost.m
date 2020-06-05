@@ -42,11 +42,11 @@ cvx_begin
 %         end
 %     end
     
-    for j = 1:noe
-        for i = 1:nov
-            serv_capa_accum_edge(j) = serv_capa_accum_edge(j) + serv(i,j)*serv_app(i)*x(i,j);
-        end
-    end
+%     for j = 1:noe
+%         for i = 1:nov
+%             serv_capa_accum_edge(j) = serv_capa_accum_edge(j) + serv(i,j)*serv_app(i)*x(i,j);
+%         end
+%     end
 
     for j = 1:noe
         for k = len_of_sets(j)+1:len_of_sets(j+1)
